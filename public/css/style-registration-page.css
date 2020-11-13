@@ -1,0 +1,10 @@
+#login {
+    background: rgba(229, 229, 229, 0.9);
+    order: 2;
+}
+
+#registration {
+    background: rgba(196, 196, 196, 0.9);
+    order: 1;
+}
+
