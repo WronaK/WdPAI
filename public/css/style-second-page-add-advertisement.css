@@ -1,0 +1,39 @@
+#second-page {
+    background: rgba(196, 196, 196, 0.9);
+}
+
+#form-add label {
+    text-align: center;
+}
+
+#form-add i {
+    text-align: center;
+    font-size: 5em;
+}
+
+#description {
+    grid-area: 4/1/9;
+    resize: none;
+}
+
+@media only screen and (min-width: 768px) {
+
+    [for~="image-add"] {
+        grid-area: 1/2;
+    }
+
+    #form-add i {
+        grid-area: 2/2/5;
+        text-align: center;
+        font-size: 5em;
+    }
+
+    [for~="description"] {
+        grid-area: 4/2;
+    }
+
+    #description {
+        grid-area: 5/1/8/4;
+        resize: none;
+    }
+}
