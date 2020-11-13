@@ -1,0 +1,20 @@
+#fifth-page {
+    background: rgba(196, 196, 196, 0.9);
+}
+
+#description {
+    grid-area: 2/1/8;
+    resize: none;
+}
+
+@media only screen and (min-width: 768px) {
+    [for~="description"] {
+        grid-area: 2/2;
+    }
+
+    #description {
+        grid-area: 3/2/8;
+        resize: none;
+    }
+}
+
