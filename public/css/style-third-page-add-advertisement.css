@@ -1,0 +1,38 @@
+#third-page {
+    background: rgba(196, 196, 196, 0.9);
+}
+
+@media only screen and (min-width: 768px) {
+
+    [for~="city"] {
+        grid-area: 1/2;
+    }
+
+    #city {
+        grid-area: 2/2;
+    }
+
+    [for~="street"] {
+        grid-area: 3/2;
+    }
+
+    #street {
+        grid-area: 4/2;
+    }
+
+    [for~="number-house"] {
+        grid-area: 5/2;
+    }
+
+    #number-house {
+        grid-area: 6/2;
+    }
+
+    [for~="code"] {
+        grid-area: 7/2;;
+    }
+
+    #code {
+        grid-area: 8/2;
+    }
+}
