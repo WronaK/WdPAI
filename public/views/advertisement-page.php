@@ -30,34 +30,36 @@
             <main>
                 <section id="basic-information">
                     <h3>Informacje podstawowe </h3>
-                    Rodzaj nieruchomości <br/>
-                    Powierzchnia <br/>
-                    Liczba pokoi <br/>
-                    Cena<br/>
+                    Rodzaj nieruchomości: <?= $advertisement->getPropertyType() ?><br/>
+                    Powierzchnia: <?= $advertisement->getArea() ?><br/>
+                    Liczba pokoi: <?= $advertisement->getNumberOfRooms() ?><br/>
+                    Cena: <?= $advertisement->getPrice() ?><br/>
                 </section>
-                <img src="public/img/room.jpg" id="first-image">
+                <img src="public/uploads/<?= $advertisement->getImage() ?>" id="first-image">
                 <section id="description">
                     <h3>Krótki opis </h3>
+                    <p><?= $advertisement->getDescription() ?></p>
                 </section>
                 <section id="location">
                     <h3>Lokalizacja </h3>
-                    Miasto <br/>
-                    Ulica <br/>
-                    Numer budynku <br/>
-                    Kod pocztowy<br/>
+                    Miasto: <?= $advertisement->getCity() ?><br/>
+                    Ulica: <?= $advertisement->getStreet() ?> <br/>
+                    Numer budynku: <?= $advertisement->getNumberOfHouse() ?> <br/>
+                    Kod pocztowy: <?= $advertisement->getPostCode() ?><br/>
                 </section>
                 <img src="public/img/room.jpg" id="second-image">
                 <section id="contact-info">
                     <h3>Informacje kontaktowe </h3>
                     <i class="fas fa-user"></i>
-                    Imię<br/>
+                    Imię: <?= $advertisement->getContactDetails()->getName() ?><br/>
                     <i class="fas fa-at"></i>
-                    Email<br/>
+                    Email:  <?= $advertisement->getContactDetails()->getEmail() ?><br/>
                     <i class="fas fa-phone-square-alt"></i>
-                    Numer telefonu<br/>
+                    Numer telefonu:  <?= $advertisement->getContactDetails()->getPhoneNumber() ?><br/>
                 </section>
                 <section id="other-information">
                     <h3>Informacje dodatkowe</h3>
+                    <p> <?= $advertisement->getDescriptionOfTargetGroup() ?></p>
                 </section>
                 <div id="like">
                     <i class="fas fa-heart"></i>
