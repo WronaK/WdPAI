@@ -10,12 +10,12 @@ Routing::get('login', 'DefaultController');
 Routing::get('registration', 'DefaultController');
 Routing::get('search', 'DefaultController');
 Routing::get('advertisement', 'DefaultController');
-Routing::get('firstForm', 'DefaultController');
-Routing::get('secondForm', 'DefaultController');
-Routing::get('thirdForm', 'DefaultController');
-Routing::get('fourthForm', 'DefaultController');
-Routing::get('fifthForm', 'DefaultController');
 
 Routing::post('login', 'SecurityController');
+Routing::post('firstForm', 'AdvertisementController');
+Routing::post('secondForm', 'AdvertisementController');
+Routing::post('thirdForm', 'AdvertisementController');
+Routing::post('fourthForm', 'AdvertisementController');
+Routing::post('fifthForm', 'AdvertisementController');
 
 Routing::run($path);
