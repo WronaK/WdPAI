@@ -49,10 +49,13 @@
                     <span class="phone">5</span>
                     <span class="web">DANE DODATKOWE</span>
                 </div>
-                <form id="form-add">
+                <form id="form-add" action="fifthForm" method="POST">
                     <label for="description">DODAJ OPIS GRUPY OSÓB DO KTÓREJ KIERUJESZ TO OGŁOSZENIE</label>
-                    <textarea id="description" placeholder="Tutaj możesz krótko napisać o tym komu chcesz wynająć to mieszkanie/pokój."></textarea>
-                    <button>UTWÓRZ OGŁOSZENIE</button>
+                    <textarea name="description-group"
+                              id="description"
+                              placeholder="Tutaj możesz krótko napisać o tym komu chcesz wynająć to mieszkanie/pokój.">
+                    </textarea>
+                    <button type="submit">UTWÓRZ OGŁOSZENIE</button>
                 </form>
             </main>
         </div>
