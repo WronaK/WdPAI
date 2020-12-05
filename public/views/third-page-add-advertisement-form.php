@@ -49,16 +49,16 @@
                     <span class="phone">5</span>
                     <span class="web">DANE DODATKOWE</span>
                 </div>
-                <form id="form-add">
+                <form id="form-add" action="thirdForm" method="POST">
                     <label for="city">MIASTO</label>
-                    <input type="text" id="city" placeholder="Kraków">
+                    <input name="city" type="text" id="city" placeholder="Kraków">
                     <label for="street">ULICA</label>
-                    <input type="text" id="street" placeholder="Siewna">
+                    <input name="street" type="text" id="street" placeholder="Siewna">
                     <label for="number-house">NUMER BUDYNKU</label>
-                    <input type="number" id="number-house" placeholder="34">
+                    <input name="number-house" type="number" id="number-house" placeholder="34">
                     <label for="code">KOD POCZTOWY</label>
-                    <input type="text" id="code" placeholder="55-237">
-                    <button>DALEJ</button>
+                    <input name="code" type="text" id="code" placeholder="55-237">
+                    <button type="submit">DALEJ</button>
                 </form>
             </main>
         </div>
