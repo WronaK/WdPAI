@@ -49,14 +49,14 @@
                     <span class="phone">5</span>
                     <span class="web">DANE DODATKOWE</span>
                 </div>
-                <form id="form-add">
+                <form id="form-add" action="fourthForm" method="POST">
                     <label for="name">IMIĘ</label>
-                    <input type="text" id="name" placeholder="Adam">
+                    <input name="name" type="text" id="name" placeholder="Adam">
                     <label for="email">EMAIL</label>
-                    <input type="email" id="email" placeholder="adam@gmail.com">
+                    <input name="email" type="email" id="email" placeholder="adam@gmail.com">
                     <label for="number-phone">TELEFON KONTAKTOWY</label>
-                    <input type="text" id="number-phone" placeholder="639467267">
-                    <button>DALEJ</button>
+                    <input name="number-phone" type="text" id="number-phone" placeholder="639467267">
+                    <button type="submit">DALEJ</button>
                 </form>
             </main>
         </div>
