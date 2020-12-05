@@ -49,12 +49,20 @@
                     <span class="phone">5</span>
                     <span class="web">DANE DODATKOWE</span>
                 </div>
-                <form id="form-add">
+                <form id="form-add" action="secondForm" method="POST" enctype="multipart/form-data">
                     <label for="image-add">DODAJ ZDJĘCIA</label>
-                    <i class="far fa-images"></i>                      
+                    <div id="add-file">
+                        <label for="file-input">
+                            <i class="far fa-images"></i>
+                        </label>
+                        <input name="image-input" id="file-input" type="file" accept="image/png, image/jpeg">
+                    </div>
                     <label for="description">DODAJ OPIS</label>
-                    <textarea id="description" placeholder="Tutaj możesz krótko opisać mieszkanie/pokój które chcesz wynająć."></textarea>
-                    <button>Dalej</button>
+                    <textarea name="description"
+                              id="description"
+                              placeholder="Tutaj możesz krótko opisać mieszkanie/pokój które chcesz wynająć.">
+                    </textarea>
+                    <button type="submit">Dalej</button>
                 </form>
             </main>
         </div>
