@@ -33,6 +33,7 @@
                 <div id="registration">REJESTRACJA</div>
                 <form id="form-login">
                     <input type="text" placeholder="Imię">
+                    <input type="text" placeholder="Nazwisko">
                     <input type="text" placeholder="Email">
                     <input type="text" placeholder="Hasło">
                     <input type="text" placeholder="Powtórz hasło">
