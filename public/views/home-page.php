@@ -47,54 +47,17 @@
                         NOWE OGŁOSZENIA
                     </div>
                     <section>
-                        <div class="advertisement">
-                            <img src="public/img/room.jpg">
-                            <div class="description">
-                                Lokalizacja<br/>
-                                Powierzchnia<br/>
-                                Cena<br/>
+                        <?php foreach($advertisements as $advertisement): ?>
+                            <div class="advertisement">
+                                <img src="public/uploads/<?= $advertisement->getImage(); ?>">
+                                <div class="description">
+                                    <div>Lokalizacja: <?= $advertisement->getCity(); ?></div>
+                                    <div>Powierzchnia: <?= $advertisement->getArea(); ?></div>
+                                    <div>Cena: <?= $advertisement->getPrice(); ?></div>
+                                    <div>Krótki opis: <?= $advertisement->getDescription(); ?></div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="advertisement">
-                            <img src="public/img/room.jpg">
-                            <div class="description">
-                                Lokalizacja<br/>
-                                Powierzchnia<br/>
-                                Cena<br/>
-                            </div>
-                        </div>
-                        <div class="advertisement">
-                            <img src="public/img/room.jpg">
-                            <div class="description">
-                                Lokalizacja<br/>
-                                Powierzchnia<br/>
-                                Cena<br/>
-                            </div>
-                        </div>
-                        <div class="advertisement">
-                            <img src="public/img/room.jpg">
-                            <div class="description">
-                                Lokalizacja<br/>
-                                Powierzchnia<br/>
-                                Cena<br/>
-                            </div>
-                        </div>
-                        <div class="advertisement">
-                            <img src="public/img/room.jpg">
-                            <div class="description">
-                                Lokalizacja<br/>
-                                Powierzchnia<br/>
-                                Cena<br/>
-                            </div>
-                        </div>
-                        <div class="advertisement">
-                            <img src="public/img/room.jpg">
-                            <div class="description">
-                                Lokalizacja<br/>
-                                Powierzchnia<br/>
-                                Cena<br/>
-                            </div>
-                        </div>
+                        <?php endforeach; ?>
                     </section>
                 </section>
             </main>

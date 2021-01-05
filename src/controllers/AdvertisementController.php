@@ -3,6 +3,7 @@
 require_once 'AppController.php';
 require_once __DIR__.'/../models/Advertisement.php';
 require_once __DIR__.'/../models/ContactDetails.php';
+require_once __DIR__ . '/../repository/AdvertisementRepository.php';
 
 class AdvertisementController extends AppController
 {
@@ -11,6 +12,13 @@ class AdvertisementController extends AppController
     const UPLOAD_DIRECTORY = '/../public/uploads/';
 
     private $messages = [];
+    private $advertismentRepository;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->advertismentRepository = new AdvertisementRepository();
+    }
 
     public function firstForm() {
         if(!$this->isPost())
@@ -105,9 +113,12 @@ class AdvertisementController extends AppController
         $advertisement->setPostcode($_SESSION['code']);
         $advertisement->setContactDetails(new ContactDetails($_SESSION['name'], $_SESSION['email'], $_SESSION['number-phone']));
         $advertisement->setDescriptionOfTargetGroup($_POST['description-group']);
-
+        $this->advertismentRepository->addAdvertisement($advertisement);
         session_destroy();
-        return $this->render('advertisement-page', ['messages' => $this->messages, 'advertisement' => $advertisement]);
+
+
+        return $this->render('search-page', ['messages' => $this->messages,
+            'advertisements' => $this->advertismentRepository.getAdvertisements()]);
     }
 
     private function validate(array $files): bool
@@ -121,5 +132,15 @@ class AdvertisementController extends AppController
             return false;
         }
         return true;
+    }
+
+    public function index() {
+        $advertisements = $this->advertismentRepository->getAdvertisements();
+        $this->render('home-page', ['advertisements' => $advertisements]);
+    }
+
+    public function search() {
+        $advertisements = $this->advertismentRepository->getAdvertisements();
+        $this->render('search-page', ['advertisements' => $advertisements]);
     }
 }
