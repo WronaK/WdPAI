@@ -31,7 +31,7 @@
             <main>
                 <form class="search-panel">
                     <input type="text" placeholder="Lokalizacja">
-                    <select>
+                    <select name="propertyType">
                         <option selected disabled>Rodzaj nieruchomości</option>
                         <option>Mieszkanie</option>
                         <option>Pokój</option>

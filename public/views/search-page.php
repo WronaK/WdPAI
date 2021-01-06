@@ -6,6 +6,7 @@
         <link rel="stylesheet" type="text/css" href="public/css/style-menu.css">
         <link rel="stylesheet" type="text/css" href="public/css/style-advertisements-section.css">
         <link rel="stylesheet" type="text/css" href="public/css/style-search-page.css">
+        <script type="text/javascript" src="public/js/search.js" defer></script>
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,7 +32,7 @@
             <main>
                 <form class="search-panel">
                     <input type="text" placeholder="LOKALIZACJA">
-                    <select>
+                    <select name="propertyType">
                         <option selected disabled>RODZAJ NIERUCHOMOŚCI</option>
                         <option>Mieszkanie</option>
                         <option>Pokój</option>
@@ -40,7 +41,7 @@
                     <input type="number" step="any" placeholder="CENA DO">
                     <input type="number" step="any" placeholder="POWIERZCHNIA OD">
                     <input type="number" step="any" placeholder="POWIERZCHNIA DO">
-                    <button id="button-search">WYSZUKAJ</button>
+                    <button id="button-search" type="button">WYSZUKAJ</button>
                 </form>
                 <section class="advertisements">
                     <?php foreach($advertisements as $advertisement): ?>
@@ -58,4 +59,28 @@
             </main>
         </div>
     </body>
+
+<template id="advertisement-template">
+    <div class="advertisement">
+        <img src="">
+        <div class="description">
+            <div>
+                <span>Lokalizacja:</span>
+                <span id="city">city</span>
+            </div>
+            <div>
+                <span>Powierzchnia:</span>
+                <span id="area">area</span>
+            </div>
+            <div>
+                <span>Cena:</span>
+                <span id="price">price</span>
+            </div>
+            <div>
+                <span>Krótki opis:</span>
+                <p>description</p>
+            </div>
+        </div>
+    </div>
+</template>
 </html>

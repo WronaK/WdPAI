@@ -88,4 +88,30 @@ class AdvertisementRepository extends Repository
 
         return $result;
     }
+
+    public function getAdvertisementsBySearchParameters(string $city, string $propertyType,
+                                                        string $priceFrom, string $priceTo,
+                                                        string $areaFrom, string $areaTo) {
+
+        $searchCity = strtolower($city);
+        $searchPropertyType = strtolower($propertyType);
+
+        $stmt = $this->database->connect()->prepare('
+        SELECT * FROM advertisments WHERE LOWER(city) LIKE :city AND LOWER(property_type) LIKE :propertyType
+        AND price > :priceFrom AND price < :priceTo AND area > :areaFrom AND area < :areaTo');
+
+        $stmt->bindParam(':city', $searchCity, PDO::PARAM_STR);
+        $stmt->bindParam(':propertyType', $searchPropertyType, PDO::PARAM_STR);
+        $priceFrom1 = (float)$priceFrom;
+        $stmt->bindParam(':priceFrom', $priceFrom1, PDO::PARAM_STR);
+        $priceTo1 = (float)$priceTo;
+        $stmt->bindParam(':priceTo', $priceTo1, PDO::PARAM_STR);
+        $areaFrom1 = (float)$areaFrom;
+        $stmt->bindParam(':areaFrom', $areaFrom1, PDO::PARAM_STR);
+        $areaTo1 = (float)$areaTo;
+        $stmt->bindParam(':areaTo', $areaTo1, PDO::PARAM_STR);
+
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

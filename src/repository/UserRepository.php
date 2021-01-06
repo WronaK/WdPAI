@@ -53,9 +53,8 @@ class UserRepository extends Repository
     public function getUserDetailsId(User $user): int
     {
         $stmt = $this->database->connect()->prepare('
-        SELECT * FROM public.users_details WHERE name = :name AND surname= :surname
-        AND phone = :phone');
-
+            SELECT * FROM public.users_details WHERE name = :name AND surname = :surname AND phone = :phone
+        ');
         $name = $user->getName();
         $surname = $user->getSurname();
         $phone = $user->getPhone();

@@ -118,7 +118,26 @@ class AdvertisementController extends AppController
 
 
         return $this->render('search-page', ['messages' => $this->messages,
-            'advertisements' => $this->advertismentRepository.getAdvertisements()]);
+            'advertisements' => $this->advertismentRepository->getAdvertisements()]);
+    }
+
+    public function search() {
+        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+        if($contentType === "application/json") {
+            $content = trim(file_get_contents("php://input"));
+            $decoded = json_decode($content, true);
+
+            header('Content-type: application/json');
+            http_response_code(200);
+            echo json_encode($this->advertismentRepository->getAdvertisementsBySearchParameters(
+                $decoded['city'],
+                $decoded['propertyType'],
+                $decoded['priceFrom'],
+                $decoded['priceTo'],
+                $decoded['areaFrom'],
+                $decoded['areaTo'])
+            );
+        }
     }
 
     private function validate(array $files): bool
@@ -139,8 +158,9 @@ class AdvertisementController extends AppController
         $this->render('home-page', ['advertisements' => $advertisements]);
     }
 
-    public function search() {
+    public function advertisements () {
         $advertisements = $this->advertismentRepository->getAdvertisements();
         $this->render('search-page', ['advertisements' => $advertisements]);
     }
+
 }
