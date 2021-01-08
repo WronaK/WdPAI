@@ -13,42 +13,9 @@
     </head>
     <body>
         <div class="base-container">
-            <header>
-                <div class="logo">
-                    <img src="public/img/logo.svg">
-                </div>
-                <nav>
-                    <button>
-                        <i class="fas fa-bars">
-                    </i></button>
-                    <ul>
-                        <li><a href="#">MOJE KONTO</a></li>
-                        <li><a href="#">DODAJ OGŁOSZENIE</a></li>
-                        <li><a href="#">PRZEGLĄDAJ OGŁOSZENIA</a></li>
-                    </ul>
-                </nav>
-            </header>
+            <?php include 'templates/header.php'; ?>
             <main>
-                <div id="first-page">
-                    <span class="phone">1</span>
-                    <span class="web">INFORMACJE PODSTAWOWE</span>
-                </div>
-                <div id="second-page">
-                    <span class="phone">2</span>
-                    <span class="web">INFORMACJE SZCZEGÓŁOWE</span>
-                </div>
-                <div id="third-page">
-                    <span class="phone">3</span>
-                    <span class="web">LOKALIZACJA</span>
-                </div>
-                <div id="fourth-page">
-                    <span class="phone">4</span>
-                    <span class="web">DANE KONTAKTOWE</span>
-                </div>
-                <div id="fifth-page">
-                    <span class="phone">5</span>
-                    <span class="web">DANE DODATKOWE</span>
-                </div>
+                <?php include 'templates/bookmarks.php'; ?>
                 <form id="form-add" action="secondForm" method="POST" enctype="multipart/form-data">
                     <label for="image-add">DODAJ ZDJĘCIA</label>
                     <div id="add-file">

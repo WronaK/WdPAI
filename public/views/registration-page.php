@@ -14,21 +14,7 @@
     </head>
     <body>
         <div class="base-container">
-            <header>
-                <div class="logo">
-                    <img src="public/img/logo.svg">
-                </div>
-                <nav>
-                    <button>
-                        <i class="fas fa-bars">
-                    </i></button>
-                    <ul>
-                        <li><a href="#">MOJE KONTO</a></li>
-                        <li><a href="#">DODAJ OGŁOSZENIE</a></li>
-                        <li><a href="#">PRZEGLĄDAJ OGŁOSZENIA</a></li>
-                    </ul>
-                </nav>
-            </header>
+            <?php include 'templates/header.php'; ?>
             <main>
                 <div id="login">LOGOWANIE</div>
                 <div id="registration">REJESTRACJA</div>

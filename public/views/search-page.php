@@ -14,35 +14,9 @@
     </head>
     <body>
         <div class="base-container">
-            <header>
-                <div class="logo">
-                    <img src="public/img/logo.svg">
-                </div>
-                <nav>
-                    <button>
-                        <i class="fas fa-bars">
-                    </i></button>
-                    <ul>
-                        <li><a href="#">MOJE KONTO</a></li>
-                        <li><a href="#">DODAJ OGŁOSZENIE</a></li>
-                        <li><a href="#">PRZEGLĄDAJ OGŁOSZENIA</a></li>
-                    </ul>
-                </nav>
-            </header>
+            <?php include 'templates/header.php'; ?>
             <main>
-                <form class="search-panel">
-                    <input type="text" placeholder="LOKALIZACJA">
-                    <select name="propertyType">
-                        <option selected disabled>RODZAJ NIERUCHOMOŚCI</option>
-                        <option>Mieszkanie</option>
-                        <option>Pokój</option>
-                    </select>
-                    <input type="number" step="any" placeholder="CENA OD">
-                    <input type="number" step="any" placeholder="CENA DO">
-                    <input type="number" step="any" placeholder="POWIERZCHNIA OD">
-                    <input type="number" step="any" placeholder="POWIERZCHNIA DO">
-                    <button id="button-search" type="button">WYSZUKAJ</button>
-                </form>
+                <?php include 'templates/search-panel.php'; ?>
                 <section class="advertisements">
                     <?php foreach($advertisements as $advertisement): ?>
                     <div class="advertisement">

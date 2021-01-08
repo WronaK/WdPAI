@@ -93,9 +93,6 @@ class AdvertisementRepository extends Repository
                                                         string $priceFrom, string $priceTo,
                                                         string $areaFrom, string $areaTo) {
 
-        $searchCity = strtolower($city);
-        $searchPropertyType = strtolower($propertyType);
-
         $stmt = $this->database->connect()->prepare('
         SELECT * FROM advertisments WHERE LOWER(city) LIKE :city AND LOWER(property_type) LIKE :propertyType
         AND price > :priceFrom AND price < :priceTo AND area > :areaFrom AND area < :areaTo');
