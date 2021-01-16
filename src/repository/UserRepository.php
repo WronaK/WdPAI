@@ -8,7 +8,7 @@ class UserRepository extends Repository
     public function getUser(string $email): ?User
     {
         $stmt = $this->database->connect()->prepare('SELECT * FROM users u LEFT JOIN 
-        users_details ud ON u.id_users_details = ud.id 
+        users_details ud ON u.id_users_details = ud.id_user_details 
         WHERE email = :email');
         $stmt->bindParam(':email', $email, PDO::PARAM_STMT);
         $stmt->execute();
@@ -20,10 +20,12 @@ class UserRepository extends Repository
         }
 
         return new User(
-          $user['email'],
-          $user['password'],
-          $user['name'],
-          $user['surname']
+            $user['email'],
+            $user['password'],
+            $user['name'],
+            $user['surname'],
+            $user['phone'],
+            $user['salt'],
         );
     }
 
@@ -36,17 +38,21 @@ class UserRepository extends Repository
         $stmt->execute([
             $user->getName(),
             $user->getSurname(),
-            $user->getPhone()
+            $user->getPhone(),
         ]);
 
+        $data = new DateTime();
+
         $stmt = $this->database->connect()->prepare('
-        INSERT INTO users (email, password, id_users_details)
-        VALUES (?, ?, ?)');
+        INSERT INTO users (email, password, id_users_details, salt, created_at)
+        VALUES (?, ?, ?, ?, ?)');
 
         $stmt->execute([
             $user->getEmail(),
             $user->getPassword(),
-            $this->getUserDetailsId($user)
+            $this->getUserDetailsId($user),
+            $user->getSalt(),
+            $data->format('Y-m-d'),
         ]);
     }
 
@@ -65,6 +71,28 @@ class UserRepository extends Repository
         $stmt->execute();
 
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $data['id'];
+        return $data['id_user_details'];
+    }
+
+    public function setCookie(string $email, string $cookie) {
+        $stmt = $this->database->connect()->prepare('
+            UPDATE users SET cookie = :cookie WHERE email = :email
+         ');
+
+        $stmt->bindParam(':cookie', $cookie, PDO::PARAM_STR);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->execute();
+    }
+
+    public function getUserByCookie(string $cookie) {
+        $stmt = $this->database->connect()->prepare('
+            SELECT * FROM public.users WHERE cookie = :cookie
+        ');
+
+        $stmt->bindParam(':cookie', $cookie, PDO::PARAM_STR);
+        $stmt->execute();
+
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $data['id_user'];
     }
 }

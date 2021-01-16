@@ -1,7 +1,5 @@
 <?php
 
-require_once 'ContactDetails.php';
-
 class Advertisement
 {
     private $propertyType;
@@ -13,12 +11,44 @@ class Advertisement
     private $city;
     private $street;
     private $numberOfHouse;
-    private $contactDetails;
     private $postcode;
     private $descriptionOfTargetGroup;
+    private $like;
+    private $id;
+    private $idCreator;
 
     public function __construct()
     {
+    }
+
+    public function getIdCreator()
+    {
+        return $this->idCreator;
+    }
+
+    public function setIdCreator($idCreator): void
+    {
+        $this->idCreator = $idCreator;
+    }
+
+    public function getLike()
+    {
+        return $this->like;
+    }
+
+    public function setLike($like): void
+    {
+        $this->like = $like;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id): void
+    {
+        $this->id = $id;
     }
 
     public function getPropertyType()
@@ -64,11 +94,6 @@ class Advertisement
     public function getNumberOfHouse()
     {
         return $this->numberOfHouse;
-    }
-
-    public function getContactDetails()
-    {
-        return $this->contactDetails;
     }
 
     public function getPostcode()
@@ -124,11 +149,6 @@ class Advertisement
     public function setNumberOfHouse($numberOfHouse): void
     {
         $this->numberOfHouse = $numberOfHouse;
-    }
-
-    public function setContactDetails($contactDetails): void
-    {
-        $this->contactDetails = $contactDetails;
     }
 
     public function setPostcode($postcode): void

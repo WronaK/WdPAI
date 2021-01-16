@@ -3,7 +3,7 @@ main {
     width: 95%;
     
     display: grid;
-    grid-template-columns: 15% 5.5% 15% 5.5% 15% 5.5% 15% 5.5% 15%;
+    grid-template-columns: 20% 5% 20% 5% 20% 5% 20%;
     grid-template-rows: 10% 90%;
 }
 
@@ -17,26 +17,21 @@ main > div {
 
 #first-page {
     grid-area: 1/1/2/3;
-    order: 5;
+    order: 4;
 }
 
 #second-page {
     grid-area: 1/2/2/5;
-    order: 4;
+    order: 3;
 }
 
 #third-page {
     grid-area: 1/4/2/7;
-    order: 3;
-}
-
-#fourth-page {
-    grid-area: 1/6/2/9;
     order: 2;
 }
 
-#fifth-page {
-    grid-area: 1/8/2/10;
+#fourth-page {
+    grid-area: 1/6/2/10;
     order: 1;
 }
 
@@ -93,7 +88,7 @@ main button {
     main {
         height: 70%;
         width: 65%;
-        grid-template-columns: 18% 2.5% 18% 2.5% 18% 2.5% 18% 2.5% 18%;
+        grid-template-columns: 20% 5% 20% 5% 20% 5% 20%;
     }
     
     #form-add {

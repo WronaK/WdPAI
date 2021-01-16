@@ -4,12 +4,23 @@
     </div>
     <nav>
         <button>
-            <i class="fas fa-bars">
-            </i></button>
+            <i class="fas fa-bars"></i>
+        </button>
         <ul>
-            <li><a href="#">MOJE KONTO</a></li>
-            <li><a href="#">DODAJ OGŁOSZENIE</a></li>
-            <li><a href="#">PRZEGLĄDAJ OGŁOSZENIA</a></li>
+            <?php if(isset($_COOKIE['id'])): ?>
+            <li id="myAccount"><a>MOJE KONTO</a>
+                <ul>
+                    <li><a href="#">ZAPISANE OGŁOSZENIA</a></li>
+                    <li><a href="#">MOJE OGŁOSZENIA</a></li>
+                    <li><a href="#">USTAWIENIA</a></li>
+                    <li><a href="#" class="logout">WYLOGUJ SIĘ</a></li>
+                </ul>
+            </li>
+            <?php else: ?>
+            <li><a href="login">ZALOGUJ SIĘ</a></li>
+            <?php endif; ?>
+            <li><a href="firstForm">DODAJ OGŁOSZENIE</a></li>
+            <li><a href="advertisements">PRZEGLĄDAJ OGŁOSZENIA</a></li>
         </ul>
     </nav>
 </header>

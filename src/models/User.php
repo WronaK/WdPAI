@@ -8,14 +8,21 @@ class User
     private $name;
     private $surname;
     private $phone;
+    private $salt;
 
-    public function __construct(string $email, string $password, string $name, string $surname)
+    public function __construct(string $email, string $password, string $name, string $surname, string $phone, string $salt)
     {
         $this->email = $email;
         $this->password = $password;
         $this->name = $name;
         $this->surname = $surname;
-        $this->phone = '946723618';
+        $this->phone = $phone;
+        $this->salt = $salt;
+    }
+
+    public function getSalt(): string
+    {
+        return $this->salt;
     }
 
     public function getEmail(): string

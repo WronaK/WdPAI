@@ -55,6 +55,9 @@ img {
     object-fit: cover;
 }
 
+input:focus, button:focus {
+    outline-style: none;
+}
 
 @media only screen and (min-width: 768px) {
     .logo {

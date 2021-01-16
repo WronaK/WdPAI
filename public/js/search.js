@@ -54,6 +54,8 @@ function createAdvertisement(advertisement) {
     price.innerHTML = advertisement.price;
     const description = clone.querySelector('p');
     description.innerHTML = advertisement.description;
+    const like = clone.querySelector('.fa-heart');
+    like.innerHTML = advertisement.like;
 
     advertisementContainer.appendChild(clone);
 }

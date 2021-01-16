@@ -12,9 +12,5 @@
 </div>
 <div id="fourth-page">
     <span class="phone">4</span>
-    <span class="web">DANE KONTAKTOWE</span>
-</div>
-<div id="fifth-page">
-    <span class="phone">5</span>
     <span class="web">DANE DODATKOWE</span>
 </div>

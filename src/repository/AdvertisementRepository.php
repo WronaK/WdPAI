@@ -5,9 +5,18 @@ require_once __DIR__.'/../models/Advertisement.php';
 
 class AdvertisementRepository extends Repository
 {
+    public function getAdvertisementById(int $id)
+    {
+        $stmt = $this->database->connect()->prepare('SELECT * FROM ad_details WHERE id_ad = :id');
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function getAdvertisement(int $id): ?Advertisement
     {
-        $stmt = $this->database->connect()->prepare('SELECT * FROM advertisments WHERE id = :id');
+        $stmt = $this->database->connect()->prepare('SELECT * FROM advertisments WHERE id_ad = :id');
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
 
@@ -30,6 +39,8 @@ class AdvertisementRepository extends Repository
         $adver->setNumberOfHouse($advertisement['number_of_house']);
         $adver->setPostcode($advertisement['postcode']);
         $adver->setDescriptionOfTargetGroup($advertisement['description_of_target_group']);
+        $adver->setId($advertisement['id_ad']);
+        $adver->setLike($advertisement['like']);
 
         return $adver;
     }
@@ -43,7 +54,6 @@ class AdvertisementRepository extends Repository
         postcode, description_of_target_group, created_at, image, id_assigned_by)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
 
-        $assignedById = 3;
         $stmt->execute([
             $advertisement->getPropertyType(),
             $advertisement->getArea(),
@@ -57,7 +67,7 @@ class AdvertisementRepository extends Repository
             $advertisement->getDescriptionOfTargetGroup(),
             $data->format('Y-m-d'),
             $advertisement->getImage(),
-            $assignedById
+            $advertisement->getIdCreator(),
             ]);
     }
 
@@ -83,6 +93,8 @@ class AdvertisementRepository extends Repository
             $adver->setNumberOfHouse($advertisement['number_of_house']);
             $adver->setPostcode($advertisement['postcode']);
             $adver->setDescriptionOfTargetGroup($advertisement['description_of_target_group']);
+            $adver->setLike($advertisement['like']);
+            $adver->setId($advertisement['id_ad']);
             $result[] = $adver;
         }
 
@@ -97,8 +109,10 @@ class AdvertisementRepository extends Repository
         SELECT * FROM advertisments WHERE LOWER(city) LIKE :city AND LOWER(property_type) LIKE :propertyType
         AND price > :priceFrom AND price < :priceTo AND area > :areaFrom AND area < :areaTo');
 
+        $searchCity = strtolower($city);
+
         $stmt->bindParam(':city', $searchCity, PDO::PARAM_STR);
-        $stmt->bindParam(':propertyType', $searchPropertyType, PDO::PARAM_STR);
+        $stmt->bindParam(':propertyType', $propertyType, PDO::PARAM_STR);
         $priceFrom1 = (float)$priceFrom;
         $stmt->bindParam(':priceFrom', $priceFrom1, PDO::PARAM_STR);
         $priceTo1 = (float)$priceTo;
@@ -110,5 +124,14 @@ class AdvertisementRepository extends Repository
 
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function like(int $id) {
+        $stmt = $this->database->connect()->prepare('
+            UPDATE advertisments SET "like" = "like" + 1 WHERE id = :id
+         ');
+
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
     }
 }

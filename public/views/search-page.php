@@ -7,6 +7,9 @@
         <link rel="stylesheet" type="text/css" href="public/css/style-advertisements-section.css">
         <link rel="stylesheet" type="text/css" href="public/css/style-search-page.css">
         <script type="text/javascript" src="public/js/search.js" defer></script>
+        <script type="text/javascript" src="public/js/likes.js" defer></script>
+        <script type="text/javascript" src="public/js/logout.js" defer></script>
+        <script type="text/javascript" src="public/js/advertisement.js" defer></script>
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,13 +22,16 @@
                 <?php include 'templates/search-panel.php'; ?>
                 <section class="advertisements">
                     <?php foreach($advertisements as $advertisement): ?>
-                    <div class="advertisement">
+                    <div class="advertisement" id="<?= $advertisement->getId(); ?>">
                         <img src="public/uploads/<?= $advertisement->getImage(); ?>">
                         <div class="description">
                             <div>Lokalizacja: <?= $advertisement->getCity(); ?></div>
                             <div>Powierzchnia: <?= $advertisement->getArea(); ?></div>
                             <div>Cena: <?= $advertisement->getPrice(); ?></div>
                             <div>Krótki opis: <?= $advertisement->getDescription(); ?></div>
+                            <div class="likes">
+                                <i class="fas fa-heart"><?= $advertisement->getLike(); ?></i>
+                            </div>
                         </div>
                     </div>
                     <?php endforeach; ?>
@@ -53,6 +59,9 @@
             <div>
                 <span>Krótki opis:</span>
                 <p>description</p>
+            </div>
+            <div class="likes">
+                <i class="fas fa-heart"></i>
             </div>
         </div>
     </div>

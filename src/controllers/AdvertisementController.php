@@ -2,7 +2,6 @@
 
 require_once 'AppController.php';
 require_once __DIR__.'/../models/Advertisement.php';
-require_once __DIR__.'/../models/ContactDetails.php';
 require_once __DIR__ . '/../repository/AdvertisementRepository.php';
 
 class AdvertisementController extends AppController
@@ -13,14 +12,20 @@ class AdvertisementController extends AppController
 
     private $messages = [];
     private $advertismentRepository;
+    private $userRepository;
 
     public function __construct()
     {
         parent::__construct();
         $this->advertismentRepository = new AdvertisementRepository();
+        $this->userRepository = new UserRepository();
     }
 
     public function firstForm() {
+        if(!isset($_COOKIE['id'])) {
+           return $this->render('login-page');
+        }
+
         if(!$this->isPost())
         {
             return $this->render('first-page-add-advertisement-form');
@@ -39,6 +44,10 @@ class AdvertisementController extends AppController
 
     public function secondForm()
     {
+        if(!isset($_COOKIE['id'])) {
+            return $this->render('login-page');
+        }
+
         if($this->isPost() && is_uploaded_file($_FILES['image-input']['tmp_name']) && $this->validate($_FILES['image-input'])) {
 
             move_uploaded_file(
@@ -60,6 +69,10 @@ class AdvertisementController extends AppController
     }
 
     public function thirdForm() {
+        if(!isset($_COOKIE['id'])) {
+            return $this->render('login-page');
+        }
+
         if(!$this->isPost())
         {
             return $this->render('third-page-add-advertisement-form');
@@ -77,25 +90,13 @@ class AdvertisementController extends AppController
     }
 
     public function fourthForm() {
+        if(!isset($_COOKIE['id'])) {
+            return $this->render('login-page');
+        }
+
         if(!$this->isPost())
         {
             return $this->render('fourth-page-add-advertisement-form');
-        }
-
-        session_start();
-
-        $_SESSION['name'] = $_POST['name'];
-        $_SESSION['email'] = $_POST['email'];
-        $_SESSION['number-phone'] = $_POST['number-phone'];
-
-        $url = "http://$_SERVER[HTTP_HOST]";
-        header("Location: {$url}/fifthForm");
-    }
-
-    public function fifthForm() {
-        if(!$this->isPost())
-        {
-            return $this->render('fifth-page-add-advertisement-form');
         }
 
         session_start();
@@ -111,13 +112,13 @@ class AdvertisementController extends AppController
         $advertisement->setStreet($_SESSION['street']);
         $advertisement->setNumberOfHouse($_SESSION['number-house']);
         $advertisement->setPostcode($_SESSION['code']);
-        $advertisement->setContactDetails(new ContactDetails($_SESSION['name'], $_SESSION['email'], $_SESSION['number-phone']));
         $advertisement->setDescriptionOfTargetGroup($_POST['description-group']);
+        $advertisement->setIdCreator($this->userRepository->getUserByCookie($_COOKIE['id']));
         $this->advertismentRepository->addAdvertisement($advertisement);
         session_destroy();
 
 
-        return $this->render('search-page', ['messages' => $this->messages,
+        return $this->render('home-page', ['messages' => $this->messages,
             'advertisements' => $this->advertismentRepository->getAdvertisements()]);
     }
 
@@ -158,9 +159,20 @@ class AdvertisementController extends AppController
         $this->render('home-page', ['advertisements' => $advertisements]);
     }
 
-    public function advertisements () {
+    public function advertisements() {
         $advertisements = $this->advertismentRepository->getAdvertisements();
         $this->render('search-page', ['advertisements' => $advertisements]);
     }
+
+    public function like(int $id) {
+        $this->advertismentRepository->like($id);
+        http_response_code(200);
+    }
+
+    public function adver(int $id) {
+        echo json_encode($this->advertismentRepository->getAdvertisementById($id));
+//        $this->render('advertisement-page', ['advertisement' => $advertisement]);
+    }
+
 
 }

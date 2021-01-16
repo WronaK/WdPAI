@@ -7,3 +7,9 @@
     background: rgba(229, 229, 229, 0.9);
     order: 1;
 }
+
+#form-login {
+    justify-content: center;
+    gap: 1.5em
+}
+

@@ -21,9 +21,10 @@
                 <form id="form-login" action="registration" method="POST">
                     <input name="name" type="text" placeholder="Imię">
                     <input name="surname" type="text" placeholder="Nazwisko">
-                    <input name="email" type="text" placeholder="Email">
-                    <input name="password" type="text" placeholder="Hasło">
-                    <input name="confirmedPassword" type="text" placeholder="Powtórz hasło">
+                    <input name="email" type="email" placeholder="Email">
+                    <input name="phone" type="text" placeholder="Numer telefonu">
+                    <input name="password" type="password" placeholder="Hasło">
+                    <input name="confirmedPassword" type="password" placeholder="Powtórz hasło">
                     <button type="sumbit">ZAREJESTRUJ SIĘ</button>
                 </form>
             </main>
