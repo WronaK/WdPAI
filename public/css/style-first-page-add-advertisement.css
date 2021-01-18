@@ -12,7 +12,7 @@
     }
 
     [for~="area"] {
-        grid-area: 3/2;;
+        grid-area: 3/2;
     }
 
     #area {

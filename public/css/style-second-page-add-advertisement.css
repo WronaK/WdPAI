@@ -9,6 +9,12 @@
 #form-add i {
     text-align: center;
     font-size: 5em;
+    cursor: pointer;
+    width: 100%;
+}
+
+#add-file > input {
+    display: none;
 }
 
 #description {
@@ -22,12 +28,9 @@
         grid-area: 1/2;
     }
 
-    #form-add i {
-        grid-area: 2/2/5;
-        text-align: center;
-        font-size: 5em;
+    #add-file {
+        grid-area: 2/2/4;
     }
-
     [for~="description"] {
         grid-area: 4/2;
     }

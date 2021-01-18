@@ -1,0 +1,33 @@
+body {
+    background: #E5E5E5;
+}
+
+main {
+    display: grid;
+    grid-template-rows: 10% auto;
+
+}
+
+.advertisements {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1em;
+    justify-content: space-around;
+    margin: 0.5em;
+    align-self: flex-start;
+    width: 95%;
+    justify-self: center;
+}
+
+@media only screen and (min-width: 768px) {
+
+    main {
+        grid-template-rows: 15% auto;
+    }
+
+    .advertisements {
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 2em;
+    }
+}
+

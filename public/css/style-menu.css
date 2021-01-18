@@ -1,12 +1,25 @@
-nav > ul > li {
+ul {
+    padding: 0;
+    list-style: none;
+}
+
+ul a {
     text-align: center;
+    text-decoration: none;
+    display: block;
+    color: black;
+}
+
+nav ul li {
     background: #E8E8E8;
 }
 
-nav > ul > li > a {
-    display: block;
-    text-decoration: none;
-    color: black;
+nav ul li ul li {
+    background: #C4C4C4;
+}
+
+nav ul li:hover ul li:hover a {
+    background: #E5E5E5;
 }
 
 @media only screen and (max-width: 768px) {
@@ -14,7 +27,7 @@ nav > ul > li > a {
         width: 20%;
         display: flex;
         justify-content: flex-end;
-        align-items: stretch;   
+        align-items: stretch;
     }
 
     nav i {
@@ -35,12 +48,9 @@ nav > ul > li > a {
     nav > ul > li {
         width: 100vw;
         line-height: 2em;
-        font-size: 1.5em;
     }
 
-    nav > button {
-        height: 100%;
-        width: 100%;
+    nav button {
         border-style: none;
         background-color: transparent;
     }
@@ -61,19 +71,22 @@ nav > ul > li > a {
         background: #A9A0A0;
         color: #E8E8E8;
     }
+
+    li > ul > li > a:hover {
+        background: #E5E5E5;
+    }
 }
 
 @media only screen and (min-width: 768px) {
     nav {
         width: 80%;
     }
-    
+
     nav > button {
         display: none;
     }
 
     nav > ul {
-        list-style-type: none;
         height: 100%;
 
         display: flex;
@@ -82,23 +95,51 @@ nav > ul > li > a {
         align-items: center;
     }
 
+    li ul li {
+        position: relative;
+        display: flex;
+        justify-content: center;
+    }
+
     nav > ul > li {
         box-shadow: 0 0.2em 0.2em rgba(0, 0, 0, 0.25);
-        border-radius: 1.5em;
+        border-radius: 1em;
         line-height: 2.5em;
-        width: 33%;
+        width: 20vw;
+    }
+
+    nav ul li:hover ul {
+        display: block;
+    }
+
+    #myAccount:hover {
+        border-radius: 1em 1em 0 0;
     }
 
     nav > ul > li:first-child {
         background: #118924;
-        width: 23%;
+        width: 15vw;
     }
 
     nav > ul > li:last-child {
-        width: 42%;
+        width: 30vw;
     }
 
-    li:first-child > a {
+    li ul {
+        position: absolute;
+        flex-direction: column;
+        display: none;
+        width: inherit;
+    }
+
+    nav > ul > li:first-child > a {
         color: #E8E8E8;
     }
+
+    nav ul li ul li a {
+        width: 100%;
+        height: 100%;
+        padding: 0;
+    }
 }
+

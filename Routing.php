@@ -1,6 +1,8 @@
 <?php
 
 require_once 'src/controllers/DefaultController.php';
+require_once 'src/controllers/SecurityController.php';
+require_once 'src/controllers/AdvertisementController.php';
 
 class Routing {
     public static $routes;
@@ -9,8 +11,17 @@ class Routing {
         self::$routes[$url] = $controller;
     }
 
+    public static function post($url, $controller) {
+        self::$routes[$url] = $controller;
+    }
+
+    public static function delete($url, $controller) {
+        self::$routes[$url] = $controller;
+    }
+
     public static function run($url) {
-        $action = explode("/", $url)[0];
+        $urlParts = explode("/", $url);
+        $action = $urlParts[0];
 
         if(!array_key_exists($action, self::$routes)) {
             die("Wrong url!");
@@ -20,6 +31,8 @@ class Routing {
         $object = new $controller;
         $action = $action ?: 'index';
 
-        $object->$action();
+        //walidacja czy to na pewno int
+        $id = $urlParts[1] ?? '';
+        $object->$action($id);
     }
 }
