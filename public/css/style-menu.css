@@ -1,7 +1,6 @@
 ul {
     padding: 0;
     list-style: none;
-
 }
 
 ul a {
@@ -18,7 +17,6 @@ nav ul li {
 nav ul li ul li {
     background: #C4C4C4;
 }
-
 
 nav ul li:hover ul li:hover a {
     background: #E5E5E5;

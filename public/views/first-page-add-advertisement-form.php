@@ -16,22 +16,24 @@
         <div class="base-container">
             <?php include 'templates/header.php'; ?>
             <main>
-                <?php include 'templates/bookmarks.php'; ?>
-                <form id="form-add" action="firstForm" method="POST">
-                    <label for="type">RODZAJ NIERUCHOMOŚCI</label>
-                    <select name="property-type" id="type">
-                        <option selected disabled>Wybierz rodzaj nieruchomości</option>
-                        <option>Mieszkanie</option>
-                        <option>Pokój</option>
-                    </select>
-                    <label for="area">POWIERZCHNIA (w m<sup>2</sup>)</label>
-                    <input name="area" type="number" id="area"  step="any" placeholder="39,50">
-                    <label for="number-rooms">LICZBA POKOI</label>
-                    <input name="number-rooms" type="number" id="number-rooms" placeholder="2">
-                    <label for="price">CENA (w zł)</label>
-                    <input name="price" type="number" id="price" step="any" placeholder="1200">
-                    <button type="submit">DALEJ</button>
-                </form>
+                <div id="form-page">
+                    <?php include 'templates/bookmarks.php'; ?>
+                    <form id="form-add" action="firstForm" method="POST">
+                        <label for="type">RODZAJ NIERUCHOMOŚCI</label>
+                        <select name="property-type" id="type">
+                            <option selected disabled>Wybierz rodzaj nieruchomości</option>
+                            <option>Mieszkanie</option>
+                            <option>Pokój</option>
+                        </select>
+                        <label for="area">POWIERZCHNIA (w m<sup>2</sup>)</label>
+                        <input name="area" type="number" id="area"  step="any" placeholder="39,50">
+                        <label for="number-rooms">LICZBA POKOI</label>
+                        <input name="number-rooms" type="number" id="number-rooms" placeholder="2">
+                        <label for="price">CENA (w zł)</label>
+                        <input name="price" type="number" id="price" step="any" placeholder="1200">
+                        <button type="submit">DALEJ</button>
+                    </form>
+                </div>
             </main>
         </div>
     </body>

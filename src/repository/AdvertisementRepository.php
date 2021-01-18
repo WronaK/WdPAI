@@ -16,7 +16,8 @@ class AdvertisementRepository extends Repository
 
     public function getAdvertisement(int $id): ?Advertisement
     {
-        $stmt = $this->database->connect()->prepare('SELECT * FROM advertisments WHERE id_ad = :id');
+        $stmt = $this->database->connect()->prepare('SELECT * FROM advertisments WHERE id_ad = :id 
+        and enabled = true');
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
 
@@ -26,23 +27,7 @@ class AdvertisementRepository extends Repository
             return null;
         }
 
-        $adver = new Advertisement();
-
-        $adver->setPropertyType($advertisement['property_type']);
-        $adver->setArea($advertisement['area']);
-        $adver->setNumberOfRooms($advertisement['number_of_rooms']);
-        $adver->setPrice($advertisement['price']);
-        $adver->setImage($advertisement['image']);
-        $adver->setDescription($advertisement['description']);
-        $adver->setCity($advertisement['city']);
-        $adver->setStreet($advertisement['street']);
-        $adver->setNumberOfHouse($advertisement['number_of_house']);
-        $adver->setPostcode($advertisement['postcode']);
-        $adver->setDescriptionOfTargetGroup($advertisement['description_of_target_group']);
-        $adver->setId($advertisement['id_ad']);
-        $adver->setLike($advertisement['like']);
-
-        return $adver;
+        return $this->convert($advertisement);
     }
 
     public function addAdvertisement(Advertisement $advertisement): void
@@ -73,41 +58,29 @@ class AdvertisementRepository extends Repository
 
     public function getAdvertisements(): array
     {
-        $result = [];
-
-        $stmt = $this->database->connect()->prepare('SELECT * FROM advertisments');
+        $stmt = $this->database->connect()->prepare('SELECT * FROM advertisments WHERE enabled=true');
         $stmt->execute();
 
         $advertisements = $stmt->fetchALL(PDO::FETCH_ASSOC);
-
-        foreach ($advertisements as $advertisement) {
-            $adver = new Advertisement();
-            $adver->setPropertyType($advertisement['property_type']);
-            $adver->setArea($advertisement['area']);
-            $adver->setNumberOfRooms($advertisement['number_of_rooms']);
-            $adver->setPrice($advertisement['price']);
-            $adver->setImage($advertisement['image']);
-            $adver->setDescription($advertisement['description']);
-            $adver->setCity($advertisement['city']);
-            $adver->setStreet($advertisement['street']);
-            $adver->setNumberOfHouse($advertisement['number_of_house']);
-            $adver->setPostcode($advertisement['postcode']);
-            $adver->setDescriptionOfTargetGroup($advertisement['description_of_target_group']);
-            $adver->setLike($advertisement['like']);
-            $adver->setId($advertisement['id_ad']);
-            $result[] = $adver;
-        }
-
-        return $result;
+        return $this->convertToEntity($advertisements);
     }
 
-    public function getAdvertisementsBySearchParameters(string $city, string $propertyType,
+    public function getAdvertisementsBySearchParam(string $city, string $propertyType,
+                                                        string $priceFrom, string $priceTo,
+                                                        string $areaFrom, string $areaTo)
+    {
+        $data = $this->getAdvertisementsBySearchParameters($city, $propertyType, $priceFrom, $priceTo, $areaFrom, $areaTo);
+        $adver = $this->convertToEntity($data);
+        return $adver;
+    }
+
+        public function getAdvertisementsBySearchParameters(string $city, string $propertyType,
                                                         string $priceFrom, string $priceTo,
                                                         string $areaFrom, string $areaTo) {
 
         $stmt = $this->database->connect()->prepare('
-        SELECT * FROM advertisments WHERE LOWER(city) LIKE :city AND LOWER(property_type) LIKE :propertyType
-        AND price > :priceFrom AND price < :priceTo AND area > :areaFrom AND area < :areaTo');
+        SELECT * FROM advertisments WHERE LOWER(city) LIKE :city AND property_type LIKE :propertyType
+        AND price > :priceFrom AND price < :priceTo AND area > :areaFrom AND area < :areaTo and enabled = true');
 
         $searchCity = strtolower($city);
 
@@ -126,11 +99,150 @@ class AdvertisementRepository extends Repository
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function like(int $id) {
-        $stmt = $this->database->connect()->prepare('
-            UPDATE advertisments SET "like" = "like" + 1 WHERE id = :id
+    //rename function
+    private function isConnection(int $id, int $idUser) {
+        $stmt = $this->database->connect()->prepare('SELECT * FROM users_advertisments
+        WHERE id_users = :idUser and id_advertisments = :id' );
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function like(int $id, int $idUser) {
+        $adver = $this->isConnection($id, $idUser);
+        if($adver == null && $adver['liked'] == false) {
+            $stmt = $this->database->connect()->prepare('
+            UPDATE advertisments SET "like" = "like" + 1 WHERE id_ad = :id
          ');
 
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+        }
+
+        if($adver == null) {
+            $stmt = $this->database->connect()->prepare('
+        INSERT INTO users_advertisments (id_users, id_advertisments, liked, saved)
+        VALUES (?, ?, ?, ?)');
+
+            $stmt->execute([
+                $idUser,
+                $id,
+                1,
+                0
+            ]);
+        } else if($adver['liked']== false) {
+            $stmt = $this->database->connect()->prepare('UPDATE users_advertisments SET liked = TRUE
+        WHERE id_users = :idUser and id_advertisments = :id');
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
+            $stmt->execute();
+        }
+    }
+
+    public function save(int $id, int $idUser) {
+        $advertisement = $this->isConnection($id, $idUser);
+
+        if ($advertisement == null) {
+            $stmt = $this->database->connect()->prepare('
+        INSERT INTO users_advertisments (id_users, id_advertisments, liked, saved)
+        VALUES (?, ?, ?, ?)');
+
+            $stmt->execute([
+                $idUser,
+                $id,
+                0,
+                1
+            ]);
+        } else if($advertisement['saved'] == false) {
+            $stmt = $this->database->connect()->prepare('UPDATE users_advertisments SET saved = TRUE
+        WHERE id_users = :idUser and id_advertisments = :id');
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
+            $stmt->execute();
+        }
+    }
+
+    public function getYourAdvertisements(int $idUser) {
+        $stmt = $this->database->connect()->prepare('SELECT * FROM advertisments
+        WHERE id_assigned_by = :idUser');
+
+        $stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $advertisements = $stmt->fetchALL(PDO::FETCH_ASSOC);
+
+        return $this->convertToEntity($advertisements);
+    }
+
+    public function getSaveAdvertisements(int $idUser) {
+        $stmt = $this->database->connect()->prepare('SELECT * FROM ad_save
+        WHERE id_users = :idUser');
+
+        $stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $advertisements = $stmt->fetchALL(PDO::FETCH_ASSOC);
+
+        return $this->convertToEntity($advertisements);
+    }
+
+    private function convertToEntity(array $advertisements) {
+        $result = [];
+
+        foreach ($advertisements as $advertisement) {
+            $adver = new Advertisement();
+            $adver->setPropertyType($advertisement['property_type']);
+            $adver->setArea($advertisement['area']);
+            $adver->setNumberOfRooms($advertisement['number_of_rooms']);
+            $adver->setPrice($advertisement['price']);
+            $adver->setImage($advertisement['image']);
+            $adver->setDescription($advertisement['description']);
+            $adver->setCity($advertisement['city']);
+            $adver->setStreet($advertisement['street']);
+            $adver->setNumberOfHouse($advertisement['number_of_house']);
+            $adver->setPostcode($advertisement['postcode']);
+            $adver->setDescriptionOfTargetGroup($advertisement['description_of_target_group']);
+            $adver->setLike($advertisement['like']);
+            $adver->setId($advertisement['id_ad']);
+            $result[] = $adver;
+        }
+        return $result;
+    }
+
+    public function deleteAdver(int $idAd) {
+        $stmt = $this->database->connect()->prepare('DELETE FROM 
+        advertisments WHERE id_ad = :id');
+
+        $stmt->bindParam(':id', $idAd, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+
+    private function convert($advertisement) {
+        $adver = new Advertisement();
+
+        $adver->setPropertyType($advertisement['property_type']);
+        $adver->setArea($advertisement['area']);
+        $adver->setNumberOfRooms($advertisement['number_of_rooms']);
+        $adver->setPrice($advertisement['price']);
+        $adver->setImage($advertisement['image']);
+        $adver->setDescription($advertisement['description']);
+        $adver->setCity($advertisement['city']);
+        $adver->setStreet($advertisement['street']);
+        $adver->setNumberOfHouse($advertisement['number_of_house']);
+        $adver->setPostcode($advertisement['postcode']);
+        $adver->setDescriptionOfTargetGroup($advertisement['description_of_target_group']);
+        $adver->setId($advertisement['id_ad']);
+        $adver->setLike($advertisement['like']);
+
+        return $adver;
+    }
+
+    public function disabledAd(int $id)
+    {
+        $stmt = $this->database->connect()->prepare('UPDATE advertisments SET enabled = FALSE
+        WHERE id_assigned_by = :id');
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
     }

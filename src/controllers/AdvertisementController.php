@@ -3,6 +3,8 @@
 require_once 'AppController.php';
 require_once __DIR__.'/../models/Advertisement.php';
 require_once __DIR__ . '/../repository/AdvertisementRepository.php';
+require_once __DIR__.'/../repository/UserRepository.php';
+
 
 class AdvertisementController extends AppController
 {
@@ -113,7 +115,7 @@ class AdvertisementController extends AppController
         $advertisement->setNumberOfHouse($_SESSION['number-house']);
         $advertisement->setPostcode($_SESSION['code']);
         $advertisement->setDescriptionOfTargetGroup($_POST['description-group']);
-        $advertisement->setIdCreator($this->userRepository->getUserByCookie($_COOKIE['id']));
+        $advertisement->setIdCreator($this->userRepository->getUserIdByCookie($_COOKIE['id']));
         $this->advertismentRepository->addAdvertisement($advertisement);
         session_destroy();
 
@@ -141,6 +143,23 @@ class AdvertisementController extends AppController
         }
     }
 
+    public function searchNextPage() {
+        $location = $_POST['location'];
+        $propertyType = $_POST['propertyType'];
+        $priceFrom = $_POST['priceFrom'];
+        $priceTo = $_POST['priceTo'];
+        $areaFrom = $_POST['areaFrom'];
+        $areaTo = $_POST['areaTo'];
+
+        $advertisements = $this->advertismentRepository->getAdvertisementsBySearchParam($location,
+                                            $propertyType,
+                                            $priceFrom,
+                                            $priceTo,
+                                            $areaFrom,
+                                            $areaTo);
+        $this->render('search-page', ['advertisements' => $advertisements]);
+    }
+
     private function validate(array $files): bool
     {
         if($files['size'] > self::MAX_FILE_SIZE) {
@@ -165,14 +184,43 @@ class AdvertisementController extends AppController
     }
 
     public function like(int $id) {
-        $this->advertismentRepository->like($id);
+        $idUser = $this->userRepository->getUserIdByCookie($_COOKIE['id']);
+        $this->advertismentRepository->like($id, $idUser);
+        http_response_code(200);
+    }
+
+    public function delete(int $id) {
+        $this->advertismentRepository->deleteAdver($id);
+        http_response_code(200);
+    }
+
+    public function save(int $id) {
+        $idUser = $this->userRepository->getUserIdByCookie($_COOKIE['id']);
+        $this->advertismentRepository->save($id, $idUser);
         http_response_code(200);
     }
 
     public function adver(int $id) {
         echo json_encode($this->advertismentRepository->getAdvertisementById($id));
-//        $this->render('advertisement-page', ['advertisement' => $advertisement]);
     }
 
+    public function yourAdvertisements() {
+        if(!isset($_COOKIE['id'])) {
+            return $this->render('home-page');
+        }
 
+        $idUser = $this->userRepository->getUserIdByCookie($_COOKIE['id']);
+        $advertisements = $this->advertismentRepository->getYourAdvertisements($idUser);
+        $this->render('your-advertisement', ['advertisements' => $advertisements]);
+    }
+
+    public function saveAdvertisements() {
+        if(!isset($_COOKIE['id'])) {
+            return $this->render('home-page');
+        }
+
+        $idUser = $this->userRepository->getUserIdByCookie($_COOKIE['id']);
+        $advertisements = $this->advertismentRepository->getSaveAdvertisements($idUser);
+        $this->render('save-advertisement', ['advertisements' => $advertisements]);
+    }
 }

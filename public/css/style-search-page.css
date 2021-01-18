@@ -2,19 +2,24 @@ body {
     background: #E5E5E5;
 }
 
+/*main {*/
+/*    grid-template-columns: 95%;*/
+/*}*/
+
 main {
-    grid-template-columns: 95%;
+    flex-wrap: wrap;
+    margin: 0 2%;
 }
 
 .search-panel {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(4, 1fr);
+    /*height: 20vh;*/
+    margin: 2% 0;
 }
 
 .search-panel input, .search-panel select {
-    background: #A9A0A0;
-    border-style: none;
     text-align: center;
 }
 
@@ -50,23 +55,29 @@ main {
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 1em;
-    justify-content: center;
 }
 
 @media only screen and (min-width: 768px) {
     main {
+        display: grid;
         grid-template-columns: 90%;
         grid-template-rows: 10% auto;
         grid-row-gap: 1.5em;
+        width: 100%;
+        margin: 0;
     }
 
     .search-panel {
         display: flex;
         justify-content: center;
+        align-self: stretch;
+        padding: 0;
+        margin: 2% 0 0 0;
     }
 
     .search-panel input, .search-panel select {
         width: 14%;
+        line-height: 1.5em;
     }
     
     .search-panel select {
@@ -85,6 +96,7 @@ main {
     .advertisements {
         grid-template-columns: repeat(3, 1fr);
         grid-gap: 2em;
+        align-self: flex-start;
     }
 }
 

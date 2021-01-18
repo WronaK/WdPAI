@@ -9,6 +9,9 @@
         <script type="text/javascript" src="public/js/likes.js" defer></script>
         <script type="text/javascript" src="public/js/logout.js" defer></script>
         <script type="text/javascript" src="public/js/advertisement.js" defer></script>
+        <script type="text/javaScript" src="./public/js/delete-adver.js" defer></script>
+
+
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,41 +21,25 @@
         <div class="base-container">
             <?php include 'templates/header.php'; ?>
             <main>
-                <form class="search-panel">
-                    <input type="text" placeholder="Lokalizacja">
+                <form class="search-panel" action="searchNextPage" method="post">
+                    <input name="location" type="text" placeholder="LOKALIZACJA">
                     <select name="propertyType">
-                        <option selected disabled>Rodzaj nieruchomości</option>
+                        <option selected disabled>RODZAJ NIERUCHOMOŚCI</option>
                         <option>Mieszkanie</option>
                         <option>Pokój</option>
                     </select>
-                    <input type="number" step="any" placeholder="Cena od">
-                    <input type="number" step="any" placeholder="Cena do">
-                    <input type="number" step="any" placeholder="Powierzchnia od">
-                    <input type="number" step="any" placeholder="Powierzchnia do">
-                    <button id="button-search">Wyszukaj</button>
+                    <input name="priceFrom" type="number" step="any" placeholder="CENA OD">
+                    <input name="priceTo" type="number" step="any" placeholder="CENA DO">
+                    <input name="areaFrom" type="number" step="any" placeholder="POWIERZCHNIA OD">
+                    <input name="areaTo" type="number" step="any" placeholder="POWIERZCHNIA DO">
+                    <button id="button-search" type="submit">WYSZUKAJ</button>
                 </form>
                 <section class="advertisements">
                     <div id="title-section">
                         NOWE OGŁOSZENIA
                     </div>
                     <section class="advertisements">
-                        <?php foreach($advertisements as $advertisement): ?>
-                            <div class="advertisement" id="<?= $advertisement->getId(); ?>">
-                                <img src="public/uploads/<?= $advertisement->getImage(); ?>">
-                                <div class="description">
-                                    <div>Lokalizacja: <?= $advertisement->getCity(); ?></div>
-                                    <div>Powierzchnia: <?= $advertisement->getArea(); ?></div>
-                                    <div>Cena: <?= $advertisement->getPrice(); ?></div>
-                                    <div>Krótki opis: <?= $advertisement->getDescription(); ?></div>
-                                    <div class="likes">
-                                        <i class="fas fa-heart"><?= $advertisement->getLike(); ?></i>
-                                    </div>
-<!--                                    <form action="advertisement/--><?//= $advertisement->getId(); ?><!--" method="POST">-->
-<!--                                        <button type="submit">Wyświetl szczegóły</button>-->
-<!--                                    </form>-->
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
+                        <?php include 'templates/advertisement.php'; ?>
                     </section>
                 </section>
             </main>

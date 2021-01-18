@@ -15,6 +15,10 @@ class Routing {
         self::$routes[$url] = $controller;
     }
 
+    public static function delete($url, $controller) {
+        self::$routes[$url] = $controller;
+    }
+
     public static function run($url) {
         $urlParts = explode("/", $url);
         $action = $urlParts[0];

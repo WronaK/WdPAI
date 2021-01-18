@@ -1,4 +1,4 @@
-main { 
+#form-page {
     height: 70%;
     width: 95%;
     
@@ -7,20 +7,32 @@ main {
     grid-template-rows: 12% 88%;
 }
 
-#login, #registration {
+.bookmark {
     border-radius: 0 1em 0 0;
     line-height: 3em;
     text-align: center;
     padding: 0.2em;
 }
 
-#login {
+.first-bookmark {
     grid-area: 1/1/2/3;
+    order: 2;
 }
 
-#registration {
+.second-bookmark {
     grid-area: 1/2/2/4;
+    order: 1;
+
 }
+
+.active-bookmark {
+    background: rgba(196, 196, 196, 0.9);
+}
+
+.disactive-bookmark {
+    background: rgba(229, 229, 229, 0.9);
+}
+
 
 #form-login {
     grid-area: 2/1/3/5;
@@ -37,15 +49,14 @@ main {
 
 #form-login input, #form-login button {
     box-shadow: 0 0.2em 0.2em rgba(0, 0, 0, 0.25);
-    border-style: none;
-    text-align: center;
+    /*border-style: none;*/
+    /*text-align: center;*/
     border-radius: 0.8em;
     line-height: 1.5em;
-    font-size: 1.3em;
+    font-size: 1.2em;
 }
 
 #form-login input {
-    background: white;
     width: 95%;
 }
 
@@ -64,7 +75,7 @@ main {
 }
 
 @media only screen and (min-width: 768px) {
-    main {
+    #form-page {
         height: 70%;
         width: 45%;
         grid-template-columns: 35% 5% 35% 25%;
@@ -80,7 +91,12 @@ main {
     
     #form-login button {
         width: 70%;
-    } 
+    }
+
+    #form-login input, #form-login button {
+        line-height: 1.7em;
+        font-size: 1.5em;
+    }
 }
 
 

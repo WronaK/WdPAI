@@ -10,9 +10,9 @@
             <?php if(isset($_COOKIE['id'])): ?>
             <li id="myAccount"><a>MOJE KONTO</a>
                 <ul>
-                    <li><a href="#">ZAPISANE OGŁOSZENIA</a></li>
-                    <li><a href="#">MOJE OGŁOSZENIA</a></li>
-                    <li><a href="#">USTAWIENIA</a></li>
+                    <li><a href="saveAdvertisements">ZAPISANE OGŁOSZENIA</a></li>
+                    <li><a href="yourAdvertisements">MOJE OGŁOSZENIA</a></li>
+                    <li><a href="settings">USTAWIENIA</a></li>
                     <li><a href="#" class="logout">WYLOGUJ SIĘ</a></li>
                 </ul>
             </li>

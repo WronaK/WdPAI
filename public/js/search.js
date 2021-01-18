@@ -5,7 +5,6 @@ const priceTo = document.querySelector('input[placeholder="CENA DO"]');
 const areaFrom = document.querySelector('input[placeholder="POWIERZCHNIA OD"]');
 const areaTo = document.querySelector('input[placeholder="POWIERZCHNIA DO"]');
 const advertisementContainer = document.querySelector('.advertisements');
-
 const button = document.querySelector('#button-search');
 
 function functionSearch() {

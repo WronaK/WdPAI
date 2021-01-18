@@ -1,8 +1,9 @@
-const advertisementButtons = document.querySelectorAll("div .advertisement");
+const advertisementButtons = document.querySelectorAll(".loadAdver");
 
 function eventAdvertisement() {
     const button = this;
-    const id = button.getAttribute("id");
+    const container = button.parentElement;
+    const id = container.getAttribute("id");
 
     location.replace(`http://localhost:8080/advertisement?id=${id}`);
 }

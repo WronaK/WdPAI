@@ -10,7 +10,16 @@ Routing::get('advertisements', 'AdvertisementController');
 Routing::get('adver', 'AdvertisementController');
 Routing::get('advertisement', 'DefaultController');
 Routing::get('like', 'AdvertisementController');
-
+Routing::get('save', 'AdvertisementController');
+Routing::get('delete', 'AdvertisementController');
+Routing::get('yourAdvertisements', 'AdvertisementController');
+Routing::get('saveAdvertisements', 'AdvertisementController');
+Routing::delete('delete', 'AdvertisementController');
+Routing::post('searchNextPage', 'AdvertisementController');
+Routing::post('updateSettings', 'SecurityController');
+Routing::post('disable', 'SecurityController');
+Routing::post('disableAccount', 'SecurityController');
+Routing::post('settings', 'SecurityController');
 Routing::post('login', 'SecurityController');
 Routing::get('logout', 'SecurityController');
 Routing::get('registration', 'SecurityController');

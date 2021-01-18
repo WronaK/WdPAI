@@ -16,22 +16,24 @@
         <div class="base-container">
             <?php include 'templates/header.php'; ?>
             <main>
-                <?php include 'templates/bookmarks.php'; ?>
-                <form id="form-add" action="secondForm" method="POST" enctype="multipart/form-data">
-                    <label for="image-add">DODAJ ZDJĘCIA</label>
-                    <div id="add-file">
-                        <label for="file-input">
-                            <i class="far fa-images"></i>
-                        </label>
-                        <input name="image-input" id="file-input" type="file" accept="image/png, image/jpeg">
-                    </div>
-                    <label for="description">DODAJ OPIS</label>
-                    <textarea name="description"
-                              id="description"
-                              placeholder="Tutaj możesz krótko opisać mieszkanie/pokój które chcesz wynająć.">
-                    </textarea>
-                    <button type="submit">Dalej</button>
-                </form>
+                <div id="form-page">
+                    <?php include 'templates/bookmarks.php'; ?>
+                    <form id="form-add" action="secondForm" method="POST" enctype="multipart/form-data">
+                        <label for="image-add">DODAJ ZDJĘCIA</label>
+                        <div id="add-file">
+                            <label for="file-input">
+                                <i class="far fa-images"></i>
+                            </label>
+                            <input name="image-input" id="file-input" type="file" accept="image/png, image/jpeg">
+                        </div>
+                        <label for="description">DODAJ OPIS</label>
+                        <textarea name="description"
+                                  id="description"
+                                  placeholder="Tutaj możesz krótko opisać mieszkanie/pokój które chcesz wynająć.">
+                        </textarea>
+                        <button type="submit">Dalej</button>
+                    </form>
+                </div>
             </main>
         </div>
     </body>

@@ -16,18 +16,20 @@
         <div class="base-container">
             <?php include 'templates/header.php'; ?>
             <main>
-                <?php include 'templates/bookmarks.php'; ?>
-                <form id="form-add" action="thirdForm" method="POST">
-                    <label for="city">MIASTO</label>
-                    <input name="city" type="text" id="city" placeholder="Kraków">
-                    <label for="street">ULICA</label>
-                    <input name="street" type="text" id="street" placeholder="Siewna">
-                    <label for="number-house">NUMER BUDYNKU</label>
-                    <input name="number-house" type="number" id="number-house" placeholder="34">
-                    <label for="code">KOD POCZTOWY</label>
-                    <input name="code" type="text" id="code" placeholder="55-237">
-                    <button type="submit">DALEJ</button>
-                </form>
+                <div id="form-page">
+                    <?php include 'templates/bookmarks.php'; ?>
+                    <form id="form-add" action="thirdForm" method="POST">
+                        <label for="city">MIASTO</label>
+                        <input name="city" type="text" id="city" placeholder="Kraków">
+                        <label for="street">ULICA</label>
+                        <input name="street" type="text" id="street" placeholder="Siewna">
+                        <label for="number-house">NUMER BUDYNKU</label>
+                        <input name="number-house" type="number" id="number-house" placeholder="34">
+                        <label for="code">KOD POCZTOWY</label>
+                        <input name="code" type="text" id="code" placeholder="55-237">
+                        <button type="submit">DALEJ</button>
+                    </form>
+                </div>
             </main>
         </div>
     </body>

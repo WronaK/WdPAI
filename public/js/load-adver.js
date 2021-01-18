@@ -17,49 +17,44 @@ function init() {
 document.addEventListener('DOMContentLoaded', init);
 
 function createAdvertisement(advertisement) {
-    const template = document.querySelector('#advertisement-template');
-    const clone = template.content.cloneNode(true);
-
-    const propertyType = clone.querySelector('#property-type');
+    const propertyType = advertisementContainer.querySelector('#property-type');
     propertyType.innerHTML = advertisement.property_type;
-    const area = clone.querySelector('#area');
+    const area = advertisementContainer.querySelector('#area');
     area.innerHTML = advertisement.area;
-    const numberOfRooms = clone.querySelector('#number-of-rooms');
+    const numberOfRooms = advertisementContainer.querySelector('#number-of-rooms');
     numberOfRooms.innerHTML = advertisement.number_of_rooms;
-    const price = clone.querySelector('#price');
+    const price = advertisementContainer.querySelector('#price');
     price.innerHTML = advertisement.price;
 
 
-    const image = clone.querySelector('#first-image');
+    const image = advertisementContainer.querySelector('#first-image');
     image.src = `public/uploads/${advertisement.image}`;
 
-    const description = clone.querySelector('#description p');
+    const description = advertisementContainer.querySelector('#description p');
     description.innerHTML = advertisement.description;
 
-    const city = clone.querySelector('#city');
+    const city = advertisementContainer.querySelector('#city');
     city.innerHTML = advertisement.city;
-    const street = clone.querySelector('#street');
+    const street = advertisementContainer.querySelector('#street');
     street.innerHTML = advertisement.street;
-    const numberOfHouse = clone.querySelector('#number-of-house');
+    const numberOfHouse = advertisementContainer.querySelector('#number-of-house');
     numberOfHouse.innerHTML = advertisement.number_of_house;
-    const postCode = clone.querySelector('#post-code');
+    const postCode = advertisementContainer.querySelector('#post-code');
     postCode.innerHTML = advertisement.postcode;
 
-    const image2 = clone.querySelector('#second-image');
+    const image2 = advertisementContainer.querySelector('#second-image');
     image2.src = `public/uploads/${advertisement.image}`;
 
-    const name = clone.querySelector('#name');
+    const name = advertisementContainer.querySelector('#name');
     name.innerHTML = advertisement.name;
-    const email = clone.querySelector('#email');
+    const email = advertisementContainer.querySelector('#email');
     email.innerHTML = advertisement.email;
-    const phone = clone.querySelector('#phone-number');
+    const phone = advertisementContainer.querySelector('#phone-number');
     phone.innerHTML = advertisement.phone;
 
-    const descriptionOfTargetGroup = clone.querySelector('#description-of-target-group');
+    const descriptionOfTargetGroup = advertisementContainer.querySelector('#description-of-target-group');
     descriptionOfTargetGroup.innerHTML = advertisement.description_of_target_group;
 
-    // const like = clone.querySelector('.fa-heart');
-    // like.innerHTML = advertisement.like;
-
-    advertisementContainer.appendChild(clone);
+    const like = advertisementContainer.querySelector('#like i');
+    like.innerHTML = advertisement.like;
 }

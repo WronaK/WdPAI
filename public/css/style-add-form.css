@@ -1,13 +1,13 @@
-main {
+#form-page {
     height: 75%;
     width: 95%;
     
     display: grid;
-    grid-template-columns: 20% 5% 20% 5% 20% 5% 20%;
+    grid-template-columns: repeat(3, 20% 5%) 20%;
     grid-template-rows: 10% 90%;
 }
 
-main > div {
+.bookmark {
     border-radius: 0 1.5em 0 0;
     text-align: center;
     padding: 0.2em 1em;
@@ -85,10 +85,9 @@ main button {
 }
 
 @media only screen and (min-width: 768px) {
-    main {
+    #form-page {
         height: 70%;
         width: 65%;
-        grid-template-columns: 20% 5% 20% 5% 20% 5% 20%;
     }
     
     #form-add {
@@ -96,7 +95,7 @@ main button {
         padding: 2% 10%;
     }
 
-    main button {
+    #form-page button {
         grid-area: 9/3;
         margin: 0;
     }

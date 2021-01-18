@@ -13,20 +13,23 @@ class UserRepository extends Repository
         $stmt->bindParam(':email', $email, PDO::PARAM_STMT);
         $stmt->execute();
 
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($user == false) {
+        if ($data == false) {
             return null;
         }
 
-        return new User(
-            $user['email'],
-            $user['password'],
-            $user['name'],
-            $user['surname'],
-            $user['phone'],
-            $user['salt'],
+        $user = new User(
+            $data['email'],
+            $data['password'],
+            $data['name'],
+            $data['surname'],
+            $data['phone'],
+            $data['salt'],
         );
+
+        $user->setRole($data['id_role']);
+        return $user;
     }
 
     public function addUser(User $user)
@@ -84,7 +87,7 @@ class UserRepository extends Repository
         $stmt->execute();
     }
 
-    public function getUserByCookie(string $cookie) {
+    public function getUserIdByCookie(string $cookie) {
         $stmt = $this->database->connect()->prepare('
             SELECT * FROM public.users WHERE cookie = :cookie
         ');
@@ -94,5 +97,34 @@ class UserRepository extends Repository
 
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
         return $data['id_user'];
+    }
+
+    public function getOldPassword(string $cookie) {
+        $stmt = $this->database->connect()->prepare('
+            SELECT password, salt FROM public.users WHERE cookie = :cookie
+        ');
+
+        $stmt->bindParam(':cookie', $cookie, PDO::PARAM_STR);
+        $stmt->execute();
+
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        return [$data['password'], $data['salt'] ];
+    }
+
+    public function updatePassword(string $cookie, string $password, string $salt) {
+        $stmt = $this->database->connect()->prepare('UPDATE users SET password = :password,
+        salt = :salt WHERE cookie = :cookie');
+        $stmt->bindParam(':cookie', $cookie, PDO::PARAM_STR);
+        $stmt->bindParam(':password', $password, PDO::PARAM_STR);
+        $stmt->bindParam(':salt', $salt, PDO::PARAM_STR);
+        $stmt->execute();
+    }
+
+    public function disableAccount(string $cookie)
+    {
+        $stmt = $this->database->connect()->prepare('UPDATE users SET enabled = FALSE
+        WHERE cookie = :cookie');
+        $stmt->bindParam(':cookie', $cookie, PDO::PARAM_STR);
+        $stmt->execute();
     }
 }
