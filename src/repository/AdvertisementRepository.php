@@ -99,17 +99,6 @@ class AdvertisementRepository extends Repository
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    //rename function
-    private function isConnection(int $id, int $idUser) {
-        $stmt = $this->database->connect()->prepare('SELECT * FROM users_advertisments
-        WHERE id_users = :idUser and id_advertisments = :id' );
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
-        $stmt->execute();
-
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-
     public function like(int $id, int $idUser) {
         $adver = $this->isConnection($id, $idUser);
         if($adver == null && $adver['liked'] == false) {
@@ -188,35 +177,41 @@ class AdvertisementRepository extends Repository
         return $this->convertToEntity($advertisements);
     }
 
-    private function convertToEntity(array $advertisements) {
-        $result = [];
-
-        foreach ($advertisements as $advertisement) {
-            $adver = new Advertisement();
-            $adver->setPropertyType($advertisement['property_type']);
-            $adver->setArea($advertisement['area']);
-            $adver->setNumberOfRooms($advertisement['number_of_rooms']);
-            $adver->setPrice($advertisement['price']);
-            $adver->setImage($advertisement['image']);
-            $adver->setDescription($advertisement['description']);
-            $adver->setCity($advertisement['city']);
-            $adver->setStreet($advertisement['street']);
-            $adver->setNumberOfHouse($advertisement['number_of_house']);
-            $adver->setPostcode($advertisement['postcode']);
-            $adver->setDescriptionOfTargetGroup($advertisement['description_of_target_group']);
-            $adver->setLike($advertisement['like']);
-            $adver->setId($advertisement['id_ad']);
-            $result[] = $adver;
-        }
-        return $result;
-    }
-
     public function deleteAdver(int $idAd) {
         $stmt = $this->database->connect()->prepare('DELETE FROM 
         advertisments WHERE id_ad = :id');
 
         $stmt->bindParam(':id', $idAd, PDO::PARAM_INT);
         $stmt->execute();
+    }
+
+    public function disabledAd(int $id)
+    {
+        $stmt = $this->database->connect()->prepare('UPDATE advertisments SET enabled = FALSE
+        WHERE id_assigned_by = :id');
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+
+    public function getNewAdvertisements()
+    {
+        $stmt = $this->database->connect()->prepare('
+        SELECT * FROM advertisments WHERE enabled = true 
+        ORDER BY id_ad DESC LIMIT 6 ');
+
+        $stmt->execute();
+        $advertisement = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $this->convertToEntity($advertisement);
+    }
+
+    private function convertToEntity(array $advertisements) {
+        $result = [];
+
+        foreach ($advertisements as $advertisement) {
+            $adver = $this->convert($advertisement);
+            $result[] = $adver;
+        }
+        return $result;
     }
 
     private function convert($advertisement) {
@@ -239,11 +234,13 @@ class AdvertisementRepository extends Repository
         return $adver;
     }
 
-    public function disabledAd(int $id)
-    {
-        $stmt = $this->database->connect()->prepare('UPDATE advertisments SET enabled = FALSE
-        WHERE id_assigned_by = :id');
+    private function isConnection(int $id, int $idUser) {
+        $stmt = $this->database->connect()->prepare('SELECT * FROM users_advertisments
+        WHERE id_users = :idUser and id_advertisments = :id' );
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
         $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }

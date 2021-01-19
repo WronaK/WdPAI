@@ -7,7 +7,7 @@ function giveLike() {
 
     fetch(`/like/${id}`)
         .then(function () {
-            likes.innerHTML = parseInt(likes.innerHTML) + 1;
+            location.reload();
         })
 }
 

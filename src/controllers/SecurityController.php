@@ -27,16 +27,14 @@ class SecurityController extends AppController
 
         $email = $_POST['email'];
         $password = $_POST['password'];
-
         $user = $this->userRepository->getUser($email);
-        $salt = $user->getSalt();
-
-        $password = md5(md5($password.$salt));
-
 
         if(!$user) {
             return $this->render('login-page', ['messages' => ['Użytkownik nie istnieje!']]);
         }
+
+        $salt = $user->getSalt();
+        $password = md5(md5($password.$salt));
 
         if ($user->getEmail() !== $email) {
             return $this->render('login-page', ['messages' => ['Uzytkownik o takim emailu nie istnieje!']]);

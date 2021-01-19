@@ -5,6 +5,7 @@
         <link rel="stylesheet" type="text/css" href="public/css/style.css">
         <link rel="stylesheet" type="text/css" href="public/css/style-menu.css">
         <link rel="stylesheet" type="text/css" href="public/css/style-advertisement-page.css">
+        <script type="text/javascript" src="public/js/home.js" defer></script>
         <script type="text/javascript" src="public/js/logout.js" defer></script>
         <script type="text/javascript" src="public/js/load-adver.js" defer></script>
         <script type="text/javascript" src="public/js/action-users.js" defer></script>
@@ -20,14 +21,16 @@
                 <div class="advertisement">
                 <section id="basic-information">
                     <h3>Informacje podstawowe </h3>
-                    <span>Rodzaj nieruchomości:</span>
+                    <span>Rodzaj nieruchomości: </span>
                     <span id="property-type"></span><br/>
-                    <span>Powierzchnia:</span>
-                    <span id="area"></span><br/>
-                    <span>Liczba pokoi:</span>
+                    <span>Powierzchnia: </span>
+                    <span id="area"></span>
+                    <span>m<sup>2</sup></span><br/>
+                    <span>Liczba pokoi: </span>
                     <span id="number-of-rooms"></span><br/>
-                    <span>Cena:</span>
-                    <span id="price"></span><br/>
+                    <span>Cena: </span>
+                    <span id="price"></span>
+                    <span>zł</span><br/>
                 </section>
                 <img src="" id="first-image">
                 <section id="description">
@@ -36,20 +39,20 @@
                 </section>
                 <section id="location">
                     <h3>Lokalizacja </h3>
-                    <span>Miasto:</span><span id="city"></span><br/>
-                    <span>Ulica:</span><span id="street"></span><br/>
-                    <span>Numer budynku:</span><span id="number-of-house"></span><br/>
-                    <span>Kod pocztowy:</span><span id="post-code"></span><br/>
+                    <span>Miasto: </span><span id="city"></span><br/>
+                    <span>Ulica: </span><span id="street"></span><br/>
+                    <span>Numer budynku: </span><span id="number-of-house"></span><br/>
+                    <span>Kod pocztowy: </span><span id="post-code"></span><br/>
                 </section>
                 <img src="" id="second-image">
                 <section id="contact-info">
                     <h3>Informacje kontaktowe </h3>
                     <i class="fas fa-user"></i>
-                    <span>Imię:</span><span id="name"></span><br/>
+                    <span>Imię: </span><span id="name"></span><br/>
                     <i class="fas fa-at"></i>
-                    <span>Email:</span><span id="email"></span><br/>
+                    <span>Email: </span><span id="email"></span><br/>
                     <i class="fas fa-phone-square-alt"></i>
-                    <span>Numer telefonu:</span><span id="phone-number"></span><br/>
+                    <span>Numer telefonu: </span><span id="phone-number"></span><br/>
                 </section>
                 <section id="other-information">
                     <h3>Informacje dodatkowe</h3>
@@ -57,7 +60,6 @@
                 </section>
                 <div id="like">
                     <i class="fas fa-heart"></i>
-                    PODOBA MI SIĘ
                 </div>
                 <div id="save">
                     <i class="far fa-bookmark"></i>

@@ -120,8 +120,8 @@ class AdvertisementController extends AppController
         session_destroy();
 
 
-        return $this->render('home-page', ['messages' => $this->messages,
-            'advertisements' => $this->advertismentRepository->getAdvertisements()]);
+        $url = "http://$_SERVER[HTTP_HOST]";
+        header("Location: {$url}");
     }
 
     public function search() {
@@ -174,7 +174,7 @@ class AdvertisementController extends AppController
     }
 
     public function index() {
-        $advertisements = $this->advertismentRepository->getAdvertisements();
+        $advertisements = $this->advertismentRepository->getNewAdvertisements();
         $this->render('home-page', ['advertisements' => $advertisements]);
     }
 
@@ -206,7 +206,7 @@ class AdvertisementController extends AppController
 
     public function yourAdvertisements() {
         if(!isset($_COOKIE['id'])) {
-            return $this->render('home-page');
+            return $this->render('login-page');
         }
 
         $idUser = $this->userRepository->getUserIdByCookie($_COOKIE['id']);
@@ -216,7 +216,7 @@ class AdvertisementController extends AppController
 
     public function saveAdvertisements() {
         if(!isset($_COOKIE['id'])) {
-            return $this->render('home-page');
+            return $this->render('login-page');
         }
 
         $idUser = $this->userRepository->getUserIdByCookie($_COOKIE['id']);

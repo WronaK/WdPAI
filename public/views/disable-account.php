@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="public/css/style.css">
     <link rel="stylesheet" type="text/css" href="public/css/style-menu.css">
     <link rel="stylesheet" type="text/css" href="public/css/style-form.css">
+    <script type="text/javascript" src="public/js/home.js" defer></script>
     <script type="text/javascript" src="public/js/logout.js" defer></script>
     <script type="text/javaScript" src="./public/js/settings.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
@@ -19,7 +20,16 @@
         <div id="form-page">
             <?php include 'templates/settings.php'; ?>
             <form id="form-login" action="disable" method="POST">
-                <div>Wprowadź hasło, aby zdezaktywować konto</div>
+                <div class="messages">
+                    <?php
+                    if(isset($messages)) {
+                        foreach ($messages as $message) {
+                            echo $message;
+                        }
+                    }
+                    ?>
+                </div>
+                <h3>Wprowadź hasło, aby zdezaktywować konto</h3>
                 <input name="password" type="password" placeholder="Wprowadź hasło">
                 <button type="sumbit">ZDEZAKTYWUJ KONTO</button>
             </form>
