@@ -11,6 +11,7 @@
         <script type="text/javaScript" src="./public/js/delete-adver.js" defer></script>
         <script type="text/javascript" src="public/js/logout.js" defer></script>
         <script type="text/javascript" src="public/js/advertisement.js" defer></script>
+        <script type="text/javascript" src="public/js/home.js" defer></script>
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +21,10 @@
         <div class="base-container">
             <?php include 'templates/header.php'; ?>
             <main>
-                <?php include 'templates/search-panel.php'; ?>
+                <form class="search-panel">
+                    <?php include 'templates/search-panel.php'; ?>
+                    <button id="button-search" type="button">WYSZUKAJ</button>
+                </form>
                 <section class="advertisements">
                     <?php include 'templates/advertisement.php'; ?>
                 </section>
@@ -33,19 +37,21 @@
         <img src="">
         <div class="description">
             <div>
-                <span>Lokalizacja:</span>
+                <span>Lokalizacja: </span>
                 <span id="city">city</span>
             </div>
             <div>
-                <span>Powierzchnia:</span>
+                <span>Powierzchnia: </span>
                 <span id="area">area</span>
+                <span>m<sup>2</sup></span>
             </div>
             <div>
-                <span>Cena:</span>
+                <span>Cena: </span>
                 <span id="price">price</span>
+                <span>zł</span>
             </div>
             <div>
-                <span>Krótki opis:</span>
+                <span>Krótki opis: </span>
                 <p>description</p>
             </div>
             <div class="likes">

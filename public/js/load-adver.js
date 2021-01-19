@@ -1,6 +1,5 @@
 const advertisementContainer = document.querySelector('main');
 
-
 function init() {
     const param =location.search.substring(1).split("&");
 

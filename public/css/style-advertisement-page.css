@@ -31,6 +31,27 @@ i {
     font-size: 1em;
 }
 
+#basic-information,
+#description,
+#contact-info {
+    background: #A9A0A0;
+}
+
+#basic-information,
+#first-image,
+#description,
+#location,
+#second-image,
+#contact-info,
+#other-information,
+#like, #save {
+    width: 100%;
+}
+
+#basic-information {
+    border-radius: 1.5em 1.5em 0 0;
+}
+
 #like, #save {
     height: 5%;
     padding-top: 1em;
@@ -49,6 +70,10 @@ i {
     border-radius: 0 0 1.5em 0;
 }
 
+#like:hover,#save:hover {
+    opacity: 60%;
+}
+
 @media only screen and (min-width: 768px) {
 
     .advertisement {
@@ -58,7 +83,7 @@ i {
         display: grid;
         align-self: center;
         grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: 45% 40% 15%;
+        grid-template-rows: 50% 40% 10%;
         align-items: stretch;
         box-shadow: 0 0.2em 0.2em rgba(0, 0, 0, 0.25);
         border-radius: 1.5em;
@@ -82,13 +107,11 @@ i {
     #other-information,
     #like, #save {
         height: 100%;
-        width: 100%;
     }
 
     #basic-information {
         grid-area: 1/1;
-        background: #E5E5E5;
-        border-top-left-radius: 1.5em;
+        border-radius: 1.5em 0 0 0;
     }
 
     #first-image {
@@ -116,11 +139,11 @@ i {
 
     #other-information {
         grid-area: 2/4;
-        background: #E5E5E5;
     }
 
     #like, #save {
         padding-top: 1em;
+        width: 100%;
     }
 
     i {

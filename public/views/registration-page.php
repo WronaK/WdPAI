@@ -5,6 +5,7 @@
         <link rel="stylesheet" type="text/css" href="public/css/style.css">
         <link rel="stylesheet" type="text/css" href="public/css/style-menu.css">
         <link rel="stylesheet" type="text/css" href="public/css/style-form.css">
+        <script type="text/javascript" src="public/js/home.js" defer></script>
         <script type="text/javaScript" src="./public/js/script.js" defer></script>
         <script type="text/javaScript" src="./public/js/registration.js" defer></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">

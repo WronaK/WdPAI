@@ -17,10 +17,9 @@ function giveLike() {
     alert(id);
     fetch(`/like/${id}`)
         .then(function () {
-            like.innerHTML = parseInt(like.innerHTML) + 1;
+            location.reload();
         })
 }
-
 
 function saveAd() {
     const param = location.search.substring(1).split("&");

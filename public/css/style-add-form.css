@@ -15,6 +15,10 @@
     font-size: 1em;
 }
 
+#form-add input, #form-add textarea, #form-add select {
+    background: #E5E5E5;
+}
+
 #first-page {
     grid-area: 1/1/2/3;
     order: 4;
@@ -59,12 +63,15 @@
 #form-add label {
     padding-left: 0.5em;
     line-height: 1.5em;
+    font-size: 1.2em;
     font-weight: bold;
     align-self: flex-end;
 }
 
 #form-add textarea {
     padding: 1em;
+    line-height: 1.5em;
+    font-size: 1.2em;
 }
 
 #form-add input, #form-add select {
@@ -95,6 +102,10 @@ main button {
         padding: 2% 10%;
     }
 
+    .bookmark {
+        padding-top: 0.7em;
+    }
+
     #form-page button {
         grid-area: 9/3;
         margin: 0;
@@ -110,5 +121,5 @@ main button {
     
     .web {
         display: block;
-    }  
+    }
 }

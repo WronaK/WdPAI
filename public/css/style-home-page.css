@@ -81,6 +81,10 @@ main {
         padding: 1.5em 3em 1.5em 3em;
     }
 
+    .search-panel input, .search-panel select {
+        width: 100%;
+    }
+
     #button-search {
         grid-area: 4/2;
         width: 100%;
