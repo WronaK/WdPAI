@@ -26,9 +26,10 @@ class Advertisement
         return $this->idCreator;
     }
 
-    public function setIdCreator($idCreator): void
+    public function setIdCreator($idCreator): Advertisement
     {
         $this->idCreator = $idCreator;
+        return $this;
     }
 
     public function getLike()
@@ -36,9 +37,10 @@ class Advertisement
         return $this->like;
     }
 
-    public function setLike($like): void
+    public function setLike($like): Advertisement
     {
         $this->like = $like;
+        return $this;
     }
 
     public function getId()
@@ -46,9 +48,10 @@ class Advertisement
         return $this->id;
     }
 
-    public function setId($id): void
+    public function setId($id): Advertisement
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getPropertyType()
@@ -106,59 +109,70 @@ class Advertisement
         return $this->descriptionOfTargetGroup;
     }
 
-    public function setPropertyType($propertyType): void
+    public function setPropertyType($propertyType): Advertisement
     {
         $this->propertyType = $propertyType;
+        return $this;
     }
 
-    public function setArea($area): void
+    public function setArea($area): Advertisement
     {
         $this->area = $area;
+        return $this;
     }
 
-    public function setNumberOfRooms($numberOfRooms): void
+    public function setNumberOfRooms($numberOfRooms): Advertisement
     {
         $this->numberOfRooms = $numberOfRooms;
+        return $this;
     }
 
-    public function setPrice($price): void
+    public function setPrice($price): Advertisement
     {
         $this->price = $price;
+        return $this;
     }
 
-    public function setImage($image): void
+    public function setImage($image): Advertisement
     {
         $this->image = $image;
+        return $this;
     }
 
-    public function setDescription($description): void
+    public function setDescription($description): Advertisement
     {
         $this->description = $description;
+        return $this;
     }
 
-    public function setCity($city): void
+    public function setCity($city): Advertisement
     {
         $this->city = $city;
+        return $this;
     }
 
-    public function setStreet($street): void
+    public function setStreet($street): Advertisement
     {
         $this->street = $street;
+        return $this;
     }
 
-    public function setNumberOfHouse($numberOfHouse): void
+    public function setNumberOfHouse($numberOfHouse): Advertisement
     {
         $this->numberOfHouse = $numberOfHouse;
+        return $this;
     }
 
-    public function setPostcode($postcode): void
+    public function setPostcode($postcode): Advertisement
     {
         $this->postcode = $postcode;
+        return $this;
     }
 
-    public function setDescriptionOfTargetGroup($descriptionOfTargetGroup): void
+    public function setDescriptionOfTargetGroup($descriptionOfTargetGroup): Advertisement
     {
         $this->descriptionOfTargetGroup = $descriptionOfTargetGroup;
+        return $this;
     }
 
 }

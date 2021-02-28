@@ -104,18 +104,18 @@ class AdvertisementController extends AppController
         session_start();
 
         $advertisement = new Advertisement();
-        $advertisement->setPropertyType($_SESSION['property-type']);
-        $advertisement->setArea($_SESSION['area']);
-        $advertisement->setNumberOfRooms($_SESSION['number-rooms']);
-        $advertisement->setPrice($_SESSION['price']);
-        $advertisement->setImage($_SESSION['image-input']);
-        $advertisement->setDescription($_SESSION['description']);
-        $advertisement->setCity($_SESSION['city']);
-        $advertisement->setStreet($_SESSION['street']);
-        $advertisement->setNumberOfHouse($_SESSION['number-house']);
-        $advertisement->setPostcode($_SESSION['code']);
-        $advertisement->setDescriptionOfTargetGroup($_POST['description-group']);
-        $advertisement->setIdCreator($this->userRepository->getUserIdByCookie($_COOKIE['id']));
+        $advertisement->setPropertyType($_SESSION['property-type'])
+            ->setArea($_SESSION['area'])
+            ->setNumberOfRooms($_SESSION['number-rooms'])
+            ->setPrice($_SESSION['price'])
+            ->setImage($_SESSION['image-input'])
+            ->setDescription($_SESSION['description'])
+            ->setCity($_SESSION['city'])
+            ->setStreet($_SESSION['street'])
+            ->setNumberOfHouse($_SESSION['number-house'])
+            ->setPostcode($_SESSION['code'])
+            ->setDescriptionOfTargetGroup($_POST['description-group'])
+            ->setIdCreator($this->userRepository->getUserIdByCookie($_COOKIE['id']));
         $this->advertismentRepository->addAdvertisement($advertisement);
         session_destroy();
 
